@@ -1,0 +1,75 @@
+create database dbclinica_arthur;
+use dbclinica_arthur;
+create table tb_paciente
+(id int not null auto_increment,
+nome varchar(30),
+primary key (ID));
+
+alter table tb_paciente add sexo enum("f","m");
+alter table tb_paciente modify nome varchar (150);
+
+insert into tb_paciente values
+(null, "josy", "f");
+insert into tb_paciente values
+(null, "arthur", "m");
+insert into tb_paciente values
+(null, "igro", "m");
+insert into tb_paciente values
+(null, "ana", "f");
+insert into tb_paciente values
+(null, "beatriz", "f");
+select nome from tb_paciente order by nome;
+select nome from tb_paciente where sexo = "f" ;
+select*from tb_paciente;
+
+
+
+____________________________________________________________________
+create database db_hospital_arthur;
+use db_hospital_arthur;
+
+create table paciente (
+id int not null,
+nome char (50),
+primary key (id));
+
+create table medico (
+crm int not null,
+nome char (50),
+primary key (crm));
+
+create table consulta(
+id int not null,
+crm int not null,
+data_consulta date,
+primary key (id, crm),
+foreign key (id) references paciente (id),
+foreign key (crm) references medico (crm));
+
+insert into medico(crm, nome) values ( 1010, "jose");
+insert into medico(crm, nome) values (1011, "deigo");
+insert into medico(crm, nome) values (1012, "fernado"); 
+insert into medico(crm, nome) values (1013, "diogo"); 
+
+insert into paciente(id, nome , ano_nasc) values (1, "ana",1988); 
+insert into paciente(id, nome , ano_nasc) values (2, "bruma",1990); 
+insert into paciente(id, nome , ano_nasc) values (3, "bianca",1992); 
+insert into paciente(id, nome , ano_nasc) values (4, "maria",1994); 
+insert into paciente(id, nome , ano_nasc) values (5, "joao",1999); 
+
+alter table consulta add ano_consu int;
+
+insert into consulta(crm, id , ano_consu) values (1011, 2,  2023-03-03); 
+insert into consulta(crm, id , ano_consu) values (1012, 4,  2023-03-03); 
+insert into consulta(crm, id , ano_consu) values (1010, 5,  2023-03-03); 
+insert into consulta(crm, id , ano_consu) values (1010, 3,  2023-03-03); 
+insert into consulta(crm, id , ano_consu) values (1013, 1,  2023-03-03); 
+
+select nome from medico order by nome;
+select id from pacienstes where ano_nasc between 1985 and 1999;
+select nome from pacinete where nome like "j%";
+alter table paciente add sexo enum ("f","m");
+select* from medico;
+update paciente set sexo = "f" where id in (1,2,3,4);
+update paciente set sexo = "f" where id in (5);
+
